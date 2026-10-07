@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>P&Lytics | Upload Contract Note</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         NAVIGATION BAR
+    ================================== -->
+
+    <header class="navbar">
+
+
+        <div class="logo">
+
+            <!-- Blue & White P&Lytics Logo -->
+            <svg
+                class="brand-logo"
+                width="42"
+                height="42"
+                viewBox="0 0 42 42"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="P&Lytics logo"
+            >
+
+                <!-- Blue circle -->
+                <circle
+                    cx="21"
+                    cy="21"
+                    r="19"
+                    fill="#2563EB"
+                />
+
+                <!-- White bars -->
+                <rect
+                    x="10"
+                    y="22"
+                    width="4"
+                    height="8"
+                    rx="1"
+                    fill="white"
+                />
+
+                <rect
+                    x="17"
+                    y="18"
+                    width="4"
+                    height="12"
+                    rx="1"
+                    fill="white"
+                />
+
+                <rect
+                    x="24"
+                    y="14"
+                    width="4"
+                    height="16"
+                    rx="1"
+                    fill="white"
+                />
+
+                <!-- Growth line -->
+                <path
+                    d="M10 18
+                       C14 17 15 15 18 16
+                       C21 17 22 12 25 13
+                       C28 14 30 10 33 9"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+                <!-- Arrow -->
+                <path
+                    d="M29 9H33V13"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+            </svg>
+
+
+            <span class="brand-name">
+                P&Lytics
+            </span>
+
+        </div>
+
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a
+                href="upload.html"
+                class="active"
+            >
+                Upload
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="transactions.html">
+                Transactions
+            </a>
+
+            <a href="pnl.html">
+                P&L Report
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =================================
+         UPLOAD SECTION
+    ================================== -->
+
+    <main>
+
+        <section class="upload-section">
+
+
+            <div class="upload-container">
+
+
+                <!-- Page heading -->
+
+                <p class="welcome">
+                    P&LYTICS • CONTRACT NOTE
+                </p>
+
+
+                <h1>
+                    Upload Your Contract Note
+                </h1>
+
+
+                <p class="upload-description">
+
+                    Upload your broker contract-note PDF to
+                    extract your BUY and SELL transactions
+                    and calculate portfolio profit and loss.
+
+                </p>
+
+
+
+                <!-- =================================
+                     UPLOAD BOX
+                ================================== -->
+
+                <div class="upload-box">
+
+
+                    <div class="upload-icon">
+                        📄
+                    </div>
+
+
+                    <h2>
+                        Select PDF File
+                    </h2>
+
+
+                    <p>
+                        Upload a broker contract note in PDF format.
+                    </p>
+
+
+
+                    <label
+                        for="pdfFile"
+                        class="upload-button"
+                    >
+                        Choose PDF
+                    </label>
+
+
+
+                    <input
+                        type="file"
+                        id="pdfFile"
+                        accept=".pdf"
+                        hidden
+                    >
+
+
+
+                    <p
+                        id="fileName"
+                        class="file-name"
+                    >
+                        No file selected
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     INFORMATION
+                ================================== -->
+
+                <div class="upload-info">
+
+
+                    <div>
+
+                        <h3>
+                            📌 What we extract
+                        </h3>
+
+
+                        <p>
+                            Date, stock, BUY/SELL type,
+                            quantity, price and charges.
+                        </p>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <h3>
+                            🔄 What happens next?
+                        </h3>
+
+
+                        <p>
+                            The extracted transactions are
+                            processed using FIFO to calculate P&L.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     PROCESS BUTTON
+                ================================== -->
+
+                <button
+                    id="processBtn"
+                    class="btn primary process-button"
+                    disabled
+                >
+                    Process Contract Note
+                </button>
+
+
+                <p
+                    id="message"
+                    class="upload-message"
+                ></p>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =================================
+         FOOTER
+    ================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 P&Lytics |
+            Portfolio Profit & Loss Calculator
+        </p>
+
+    </footer>
+
+
+
+    <!-- =================================
+         JAVASCRIPT
+    ================================== -->
+
+    <script>
+
+
+        // =================================
+        // ELEMENTS
+        // =================================
+
+        const pdfFile =
+            document.getElementById(
+                "pdfFile"
+            );
+
+
+        const fileName =
+            document.getElementById(
+                "fileName"
+            );
+
+
+        const processBtn =
+            document.getElementById(
+                "processBtn"
+            );
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+
+        // =================================
+        // FILE SELECTION
+        // =================================
+
+        pdfFile.addEventListener(
+            "change",
+            function () {
+
+
+                if (
+                    pdfFile.files.length > 0
+                ) {
+
+
+                    const file =
+                        pdfFile.files[0];
+
+
+                    // Check file type
+
+                    if (
+                        file.type !==
+                        "application/pdf"
+                    ) {
+
+                        fileName.textContent =
+                            "Please select a PDF file.";
+
+                        processBtn.disabled =
+                            true;
+
+                        message.textContent =
+                            "Only PDF files are allowed.";
+
+                        return;
+
+                    }
+
+
+                    // Display selected file
+
+                    fileName.textContent =
+                        "Selected: " +
+                        file.name;
+
+
+                    processBtn.disabled =
+                        false;
+
+
+                    message.textContent =
+                        "";
+
+
+                } else {
+
+
+                    fileName.textContent =
+                        "No file selected";
+
+
+                    processBtn.disabled =
+                        true;
+
+
+                    message.textContent =
+                        "";
+
+                }
+
+            }
+        );
+
+
+
+        // =================================
+        // PROCESS PDF
+        // =================================
+
+        processBtn.addEventListener(
+            "click",
+            async function () {
+
+
+                if (
+                    pdfFile.files.length === 0
+                ) {
+
+                    return;
+
+                }
+
+
+
+                const file =
+                    pdfFile.files[0];
+
+
+                const formData =
+                    new FormData();
+
+
+                formData.append(
+                    "file",
+                    file
+                );
+
+
+
+                // Disable button
+
+                processBtn.disabled =
+                    true;
+
+
+                processBtn.textContent =
+                    "Processing...";
+
+
+                message.textContent =
+                    "Processing contract note...";
+
+
+
+                try {
+
+
+                    // =================================
+                    // SEND PDF TO BACKEND
+                    // =================================
+
+                    const response =
+                        await fetch(
+                            "http://127.0.0.1:5000/upload",
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+
+
+                    const data =
+                        await response.json();
+
+
+
+                    // Check response
+
+                    if (
+                        !response.ok
+                    ) {
+
+                        throw new Error(
+                            data.error ||
+                            "Upload failed"
+                        );
+
+                    }
+
+
+
+                    // =================================
+                    // SUCCESS
+                    // =================================
+
+                    message.textContent =
+                        "PDF processed successfully!";
+
+
+                    console.log(
+                        "Backend Result:"
+                    );
+
+
+                    console.log(
+                        data
+                    );
+
+
+
+                    // =================================
+                    // STORE RESULT
+                    // =================================
+
+                    localStorage.setItem(
+                        "portfolioResult",
+                        JSON.stringify(data)
+                    );
+
+
+
+                    // =================================
+                    // GO TO DASHBOARD
+                    // =================================
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "dashboard.html";
+
+                        },
+                        1000
+                    );
+
+
+                }
+
+
+                catch (error) {
+
+
+                    console.error(
+                        "Upload Error:",
+                        error
+                    );
+
+
+                    message.textContent =
+                        "Error: " +
+                        error.message;
+
+
+                    processBtn.disabled =
+                        false;
+
+
+                    processBtn.textContent =
+                        "Process Contract Note";
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>

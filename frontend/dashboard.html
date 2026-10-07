@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>P&Lytics | Portfolio Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         NAVIGATION BAR
+    ================================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <!-- Blue & White Logo -->
+            <svg
+                class="brand-logo"
+                width="42"
+                height="42"
+                viewBox="0 0 42 42"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="P&Lytics logo"
+            >
+
+                <!-- Outer circle -->
+                <circle
+                    cx="21"
+                    cy="21"
+                    r="19"
+                    fill="#2563EB"
+                />
+
+                <!-- White growth bars -->
+                <rect
+                    x="10"
+                    y="22"
+                    width="4"
+                    height="8"
+                    rx="1"
+                    fill="white"
+                />
+
+                <rect
+                    x="17"
+                    y="18"
+                    width="4"
+                    height="12"
+                    rx="1"
+                    fill="white"
+                />
+
+                <rect
+                    x="24"
+                    y="14"
+                    width="4"
+                    height="16"
+                    rx="1"
+                    fill="white"
+                />
+
+                <!-- Growth line -->
+                <path
+                    d="M10 18
+                       C14 17 15 15 18 16
+                       C21 17 22 12 25 13
+                       C28 14 30 10 33 9"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+                <!-- Arrow -->
+                <path
+                    d="M29 9H33V13"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+            </svg>
+
+
+            <span class="brand-name">
+                P&Lytics
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="upload.html">
+                Upload
+            </a>
+
+            <a
+                href="dashboard.html"
+                class="active"
+            >
+                Dashboard
+            </a>
+
+            <a href="transactions.html">
+                Transactions
+            </a>
+
+            <a href="pnl.html">
+                P&L Report
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =================================
+         MAIN DASHBOARD
+    ================================== -->
+
+    <main class="dashboard-page">
+
+
+        <!-- =================================
+             DASHBOARD HEADER
+        ================================== -->
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <p class="welcome">
+                    P&LYTICS • PORTFOLIO ANALYSIS
+                </p>
+
+                <h1>
+                    Portfolio Dashboard
+                </h1>
+
+                <p>
+                    View your transaction and profit & loss summary.
+                </p>
+
+            </div>
+
+
+            <a
+                href="upload.html"
+                class="btn primary"
+            >
+                Upload New PDF
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================
+             SUMMARY CARDS
+        ================================== -->
+
+        <section class="dashboard-cards">
+
+
+            <!-- REALISED P&L -->
+
+            <div class="dashboard-card">
+
+                <p>
+                    Realised P&L
+                </p>
+
+                <h2 id="realisedProfit">
+                    ₹0.00
+                </h2>
+
+                <span>
+                    Profit from completed sales
+                </span>
+
+            </div>
+
+
+            <!-- UNREALISED P&L -->
+
+            <div class="dashboard-card">
+
+                <p>
+                    Unrealised P&L
+                </p>
+
+                <h2 id="unrealisedProfit">
+                    ₹0.00
+                </h2>
+
+                <span>
+                    Based on current prices
+                </span>
+
+            </div>
+
+
+            <!-- TOTAL P&L -->
+
+            <div class="dashboard-card">
+
+                <p>
+                    Total P&L
+                </p>
+
+                <h2 id="totalProfit">
+                    ₹0.00
+                </h2>
+
+                <span>
+                    Realised + Unrealised
+                </span>
+
+            </div>
+
+
+            <!-- TOTAL SELL CHARGES -->
+
+            <div class="dashboard-card">
+
+                <p>
+                    Total SELL Charges
+                </p>
+
+                <h2 id="totalCharges">
+                    ₹0.00
+                </h2>
+
+                <span>
+                    Brokerage, STT and other charges
+                </span>
+
+            </div>
+
+
+            <!-- STOCKS HELD -->
+
+            <div class="dashboard-card">
+
+                <p>
+                    Stocks Held
+                </p>
+
+                <h2 id="stockCount">
+                    0
+                </h2>
+
+                <span>
+                    Current stock holdings
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             CURRENT MARKET PRICES
+        ================================== -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <h2>
+                    Current Market Prices
+                </h2>
+
+                <p>
+                    Enter the current market price of each stock
+                    to calculate unrealised P&L.
+                </p>
+
+            </div>
+
+
+            <div id="priceInputs">
+
+                <p class="empty-message">
+                    Loading prices...
+                </p>
+
+            </div>
+
+
+            <button
+                id="updatePricesBtn"
+                class="btn primary"
+                type="button"
+            >
+                Update P&L
+            </button>
+
+
+            <p id="priceMessage"></p>
+
+        </section>
+
+
+
+        <!-- =================================
+             CURRENT HOLDINGS
+        ================================== -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <h2>
+                    Current Holdings
+                </h2>
+
+                <p>
+                    Remaining shares after FIFO matching.
+                </p>
+
+            </div>
+
+
+            <div id="holdingsContainer">
+
+                <p class="empty-message">
+                    Loading holdings...
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             FIFO EXPLANATION
+        ================================== -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <h2>
+                    How FIFO Was Applied
+                </h2>
+
+                <p>
+                    The system matches sold shares with
+                    the oldest available BUY lots first.
+                </p>
+
+            </div>
+
+
+            <div class="fifo-info">
+
+
+                <div>
+
+                    <strong>
+                        1
+                    </strong>
+
+                    <span>
+                        Identify the oldest BUY lot
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        2
+                    </strong>
+
+                    <span>
+                        Match the SELL quantity
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        3
+                    </strong>
+
+                    <span>
+                        Calculate realised P&L
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        4
+                    </strong>
+
+                    <span>
+                        Keep remaining shares
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             SYSTEM STATUS
+        ================================== -->
+
+        <section class="dashboard-section">
+
+
+            <div class="project-status">
+
+
+                <div>
+
+                    <h3>
+                        System Status
+                    </h3>
+
+                    <p id="statusMessage">
+                        Connecting to backend...
+                    </p>
+
+                </div>
+
+
+                <span
+                    class="status-badge"
+                    id="statusBadge"
+                >
+                    Connecting
+                </span>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =================================
+         FOOTER
+    ================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 P&Lytics |
+            Portfolio Profit & Loss Calculator
+        </p>
+
+    </footer>
+
+
+
+    <!-- =================================
+         JAVASCRIPT
+    ================================== -->
+
+    <script>
+
+
+        // =================================
+        // BACKEND URL
+        // =================================
+
+        const API_URL =
+            "http://127.0.0.1:5000";
+
+
+
+        // =================================
+        // FORMAT MONEY
+        // =================================
+
+        function formatMoney(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "N/A";
+
+            }
+
+
+            const number =
+                Number(value);
+
+
+            if (Number.isNaN(number)) {
+
+                return "N/A";
+
+            }
+
+
+            return "₹" +
+                number.toFixed(2);
+
+        }
+
+
+
+        // =================================
+        // FORMAT NUMBER
+        // =================================
+
+        function formatNumber(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "N/A";
+
+            }
+
+
+            const number =
+                Number(value);
+
+
+            if (Number.isNaN(number)) {
+
+                return "N/A";
+
+            }
+
+
+            if (
+                Number.isInteger(number)
+            ) {
+
+                return number;
+
+            }
+
+
+            return number.toFixed(2);
+
+        }
+
+
+
+        // =================================
+        // P&L CSS CLASS
+        // =================================
+
+        function pnlClass(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "pnl-neutral";
+
+            }
+
+
+            const number =
+                Number(value);
+
+
+            if (Number.isNaN(number)) {
+
+                return "pnl-neutral";
+
+            }
+
+
+            if (number > 0) {
+
+                return "pnl-positive";
+
+            }
+
+
+            if (number < 0) {
+
+                return "pnl-negative";
+
+            }
+
+
+            return "pnl-neutral";
+
+        }
+
+
+
+        // =================================
+        // FORMAT P&L
+        // =================================
+
+        function formatPnl(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "N/A";
+
+            }
+
+
+            const number =
+                Number(value);
+
+
+            if (Number.isNaN(number)) {
+
+                return "N/A";
+
+            }
+
+
+            if (number > 0) {
+
+                return "+₹" +
+                    number.toFixed(2);
+
+            }
+
+
+            return "₹" +
+                number.toFixed(2);
+
+        }
+
+
+
+        // =================================
+        // LOAD PORTFOLIO
+        // =================================
+
+        async function loadPortfolio() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/portfolio"
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.error ||
+                        "Unable to load portfolio"
+                    );
+
+                }
+
+
+                console.log(
+                    "Portfolio data:",
+                    data
+                );
+
+
+                displaySummary(data);
+
+
+                displayHoldings(
+                    data.holdings || []
+                );
+
+
+                createPriceInputs(
+                    data.holdings || []
+                );
+
+
+                document.getElementById(
+                    "statusMessage"
+                ).textContent =
+                    "Portfolio data loaded successfully.";
+
+
+                document.getElementById(
+                    "statusBadge"
+                ).textContent =
+                    "Connected";
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Portfolio loading error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "statusMessage"
+                ).textContent =
+                    "Unable to connect to backend.";
+
+
+                document.getElementById(
+                    "statusBadge"
+                ).textContent =
+                    "Error";
+
+            }
+
+        }
+
+
+
+        // =================================
+        // DISPLAY SUMMARY
+        // =================================
+
+        function displaySummary(data) {
+
+            const realised =
+                data.realised_profit ?? 0;
+
+
+            const unrealised =
+                data.unrealised_profit ?? 0;
+
+
+            const total =
+                data.total_pnl ?? 0;
+
+
+            const totalCharges =
+                data.total_charges ?? 0;
+
+
+            const holdings =
+                data.holdings || [];
+
+
+            // Realised
+            const realisedElement =
+                document.getElementById(
+                    "realisedProfit"
+                );
+
+            realisedElement.textContent =
+                formatPnl(realised);
+
+            realisedElement.className =
+                pnlClass(realised);
+
+
+            // Unrealised
+            const unrealisedElement =
+                document.getElementById(
+                    "unrealisedProfit"
+                );
+
+            unrealisedElement.textContent =
+                formatPnl(unrealised);
+
+            unrealisedElement.className =
+                pnlClass(unrealised);
+
+
+            // Total
+            const totalElement =
+                document.getElementById(
+                    "totalProfit"
+                );
+
+            totalElement.textContent =
+                formatPnl(total);
+
+            totalElement.className =
+                pnlClass(total);
+
+
+            // Total SELL charges
+            document.getElementById(
+                "totalCharges"
+            ).textContent =
+                formatMoney(totalCharges);
+
+
+            // Stock count
+            document.getElementById(
+                "stockCount"
+            ).textContent =
+                holdings.length;
+
+        }
+
+
+
+        // =================================
+        // DISPLAY HOLDINGS
+        // =================================
+
+        function displayHoldings(holdings) {
+
+            const container =
+                document.getElementById(
+                    "holdingsContainer"
+                );
+
+
+            if (holdings.length === 0) {
+
+                container.innerHTML =
+                    '<p class="empty-message">' +
+                    'No holdings available.' +
+                    '</p>';
+
+                return;
+
+            }
+
+
+            let tableHTML = `
+
+                <div class="fifo-table-wrapper">
+
+                    <table class="data-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Stock
+                                </th>
+
+                                <th>
+                                    Quantity
+                                </th>
+
+                                <th>
+                                    FIFO Cost
+                                </th>
+
+                                <th>
+                                    Current Price
+                                </th>
+
+                                <th>
+                                    Market Value
+                                </th>
+
+                                <th>
+                                    Unrealised P&L
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+            `;
+
+
+            holdings.forEach(
+                holding => {
+
+                    const stock =
+                        holding["Stock"] || "";
+
+
+                    const quantity =
+                        holding["Quantity"];
+
+
+                    const fifoCost =
+                        holding["FIFO Cost"];
+
+
+                    const currentPrice =
+                        holding["Current Price"];
+
+
+                    const marketValue =
+                        holding["Market Value"];
+
+
+                    const unrealised =
+                        holding["Unrealised P&L"];
+
+
+                    tableHTML += `
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    ${stock}
+                                </strong>
+                            </td>
+
+                            <td>
+                                ${formatNumber(quantity)}
+                            </td>
+
+                            <td>
+                                ${formatMoney(fifoCost)}
+                            </td>
+
+                            <td>
+                                ${formatMoney(currentPrice)}
+                            </td>
+
+                            <td>
+                                ${formatMoney(marketValue)}
+                            </td>
+
+                            <td class="${pnlClass(unrealised)}">
+                                ${formatPnl(unrealised)}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            );
+
+
+            tableHTML += `
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            `;
+
+
+            container.innerHTML =
+                tableHTML;
+
+        }
+
+
+
+        // =================================
+        // CREATE PRICE INPUTS
+        // =================================
+
+        function createPriceInputs(holdings) {
+
+            const container =
+                document.getElementById(
+                    "priceInputs"
+                );
+
+
+            if (holdings.length === 0) {
+
+                container.innerHTML =
+                    '<p class="empty-message">' +
+                    'No stocks available.' +
+                    '</p>';
+
+                return;
+
+            }
+
+
+            let html = `
+
+                <div class="price-input-container">
+
+            `;
+
+
+            holdings.forEach(
+                holding => {
+
+                    const stock =
+                        holding["Stock"];
+
+
+                    const currentPrice =
+                        holding["Current Price"];
+
+
+                    const inputValue =
+                        currentPrice === null ||
+                        currentPrice === undefined
+                            ? ""
+                            : currentPrice;
+
+
+                    html += `
+
+                        <div class="price-input-card">
+
+                            <label
+                                for="price-${stock}">
+                                ${stock}
+                            </label>
+
+                            <input
+                                type="number"
+                                id="price-${stock}"
+                                value="${inputValue}"
+                                min="0"
+                                step="0.01"
+                                placeholder="Enter price"
+                            >
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+
+            html += `
+
+                </div>
+
+            `;
+
+
+            container.innerHTML =
+                html;
+
+        }
+
+
+
+        // =================================
+        // UPDATE P&L
+        // =================================
+
+        async function updatePortfolioPrices() {
+
+            const inputs =
+                document.querySelectorAll(
+                    "#priceInputs input"
+                );
+
+
+            const currentPrices = {};
+
+
+            inputs.forEach(
+                input => {
+
+                    const stock =
+                        input.id.replace(
+                            "price-",
+                            ""
+                        );
+
+
+                    const value =
+                        input.value.trim();
+
+
+                    if (value === "") {
+
+                        currentPrices[stock] =
+                            null;
+
+                    } else {
+
+                        currentPrices[stock] =
+                            Number(value);
+
+                    }
+
+                }
+            );
+
+
+            console.log(
+                "Sending prices:",
+                currentPrices
+            );
+
+
+            const message =
+                document.getElementById(
+                    "priceMessage"
+                );
+
+
+            message.textContent =
+                "Updating P&L...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+
+                        API_URL + "/portfolio",
+
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body: JSON.stringify({
+
+                                current_prices:
+                                    currentPrices
+
+                            })
+
+                        }
+
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "Updated portfolio:",
+                    data
+                );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+
+                        data.error ||
+                        "Unable to update P&L"
+
+                    );
+
+                }
+
+
+                displaySummary(data);
+
+
+                displayHoldings(
+                    data.holdings || []
+                );
+
+
+                message.textContent =
+                    "P&L updated successfully.";
+
+
+                document.getElementById(
+                    "statusMessage"
+                ).textContent =
+                    "Portfolio updated successfully.";
+
+
+                document.getElementById(
+                    "statusBadge"
+                ).textContent =
+                    "Updated";
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Update P&L error:",
+                    error
+                );
+
+
+                message.textContent =
+                    "Error: " +
+                    error.message;
+
+
+                document.getElementById(
+                    "statusMessage"
+                ).textContent =
+                    "Unable to update portfolio.";
+
+
+                document.getElementById(
+                    "statusBadge"
+                ).textContent =
+                    "Error";
+
+            }
+
+        }
+
+
+
+        // =================================
+        // BUTTON EVENT
+        // =================================
+
+        document.getElementById(
+            "updatePricesBtn"
+        ).addEventListener(
+            "click",
+            updatePortfolioPrices
+        );
+
+
+
+        // =================================
+        // LOAD INITIAL DATA
+        // =================================
+
+        loadPortfolio();
+
+
+    </script>
+
+
+</body>
+
+</html>

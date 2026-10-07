@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>P&Lytics | P&L Report</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         NAVIGATION BAR
+    ================================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <!-- Blue & White P&Lytics Logo -->
+            <svg
+                class="brand-logo"
+                width="42"
+                height="42"
+                viewBox="0 0 42 42"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="P&Lytics logo"
+            >
+
+                <!-- Blue circle -->
+                <circle
+                    cx="21"
+                    cy="21"
+                    r="19"
+                    fill="#2563EB"
+                />
+
+                <!-- White bars -->
+                <rect
+                    x="10"
+                    y="22"
+                    width="4"
+                    height="8"
+                    rx="1"
+                    fill="white"
+                />
+
+                <rect
+                    x="17"
+                    y="18"
+                    width="4"
+                    height="12"
+                    rx="1"
+                    fill="white"
+                />
+
+                <rect
+                    x="24"
+                    y="14"
+                    width="4"
+                    height="16"
+                    rx="1"
+                    fill="white"
+                />
+
+                <!-- Growth line -->
+                <path
+                    d="M10 18
+                       C14 17 15 15 18 16
+                       C21 17 22 12 25 13
+                       C28 14 30 10 33 9"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+                <!-- Arrow -->
+                <path
+                    d="M29 9H33V13"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+            </svg>
+
+
+            <span class="brand-name">
+                P&Lytics
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="upload.html">
+                Upload
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="transactions.html">
+                Transactions
+            </a>
+
+            <a
+                href="pnl.html"
+                class="active"
+            >
+                P&L Report
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =================================
+         MAIN CONTENT
+    ================================== -->
+
+    <main class="pnl-page">
+
+
+        <!-- =================================
+             PAGE HEADER
+        ================================== -->
+
+        <div class="pnl-header">
+
+            <div>
+
+                <p class="welcome">
+                    P&LYTICS • PROFIT & LOSS ANALYSIS
+                </p>
+
+                <h1>
+                    P&L Report
+                </h1>
+
+                <p>
+                    View your realised, unrealised and total
+                    portfolio profit or loss.
+                </p>
+
+            </div>
+
+
+            <a
+                href="upload.html"
+                class="btn primary"
+            >
+                Upload New PDF
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================
+             P&L SUMMARY CARDS
+        ================================== -->
+
+        <section class="pnl-summary">
+
+
+            <!-- REALISED -->
+
+            <div class="pnl-card">
+
+                <p>
+                    Realised P&L
+                </p>
+
+                <h2 id="realisedPnl">
+                    ₹0.00
+                </h2>
+
+                <span>
+                    From completed sales
+                </span>
+
+            </div>
+
+
+            <!-- UNREALISED -->
+
+            <div class="pnl-card">
+
+                <p>
+                    Unrealised P&L
+                </p>
+
+                <h2 id="unrealisedPnl">
+                    ₹0.00
+                </h2>
+
+                <span>
+                    From current holdings
+                </span>
+
+            </div>
+
+
+            <!-- TOTAL -->
+
+            <div class="pnl-card">
+
+                <p>
+                    Total P&L
+                </p>
+
+                <h2 id="totalPnl">
+                    ₹0.00
+                </h2>
+
+                <span>
+                    Realised + Unrealised
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             FIFO DETAILS
+        ================================== -->
+
+        <section class="pnl-section">
+
+
+            <div class="section-heading">
+
+                <h2>
+                    FIFO & Charge Details
+                </h2>
+
+                <p>
+                    Detailed calculation for each FIFO-matched sale.
+                </p>
+
+            </div>
+
+
+            <div id="fifoDetailsContainer">
+
+                <p class="empty-message">
+                    Loading FIFO details...
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             P&L CALCULATION
+        ================================== -->
+
+        <section class="pnl-section">
+
+
+            <div class="section-heading">
+
+                <h2>
+                    P&L Calculation
+                </h2>
+
+                <p>
+                    Summary of the portfolio calculation.
+                </p>
+
+            </div>
+
+
+            <div class="calculation-box">
+
+
+                <!-- Realised -->
+
+                <div class="calculation-row">
+
+                    <span>
+                        Realised P&L
+                    </span>
+
+                    <strong id="calcRealised">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <!-- Unrealised -->
+
+                <div class="calculation-row">
+
+                    <span>
+                        Unrealised P&L
+                    </span>
+
+                    <strong id="calcUnrealised">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <!-- SELL Charges -->
+
+                <div class="calculation-row">
+
+                    <span>
+                        Total SELL Charges
+                    </span>
+
+                    <strong id="reportTotalCharges">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <!-- Total -->
+
+                <div class="calculation-row total-row">
+
+                    <span>
+                        Total P&L
+                    </span>
+
+                    <strong id="calcTotal">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             P&L EXPLANATION
+        ================================== -->
+
+        <section class="pnl-section">
+
+
+            <div class="section-heading">
+
+                <h2>
+                    Understanding Your P&L
+                </h2>
+
+            </div>
+
+
+            <div class="pnl-explanation">
+
+
+                <!-- Realised -->
+
+                <div>
+
+                    <h3>
+                        Realised P&L
+                    </h3>
+
+                    <p>
+                        Profit or loss from shares that have
+                        already been sold. FIFO is used to
+                        determine the cost of the sold shares.
+                    </p>
+
+                </div>
+
+
+                <!-- Unrealised -->
+
+                <div>
+
+                    <h3>
+                        Unrealised P&L
+                    </h3>
+
+                    <p>
+                        Profit or loss from shares that are
+                        still held in the portfolio, based on
+                        the current market price.
+                    </p>
+
+                </div>
+
+
+                <!-- FIFO -->
+
+                <div>
+
+                    <h3>
+                        FIFO
+                    </h3>
+
+                    <p>
+                        FIFO means First In, First Out.
+                        The oldest available BUY lot is
+                        matched with a SELL first.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             CURRENT HOLDINGS P&L
+        ================================== -->
+
+        <section class="pnl-section">
+
+
+            <div class="section-heading">
+
+                <h2>
+                    Current Holdings P&L
+                </h2>
+
+                <p>
+                    Unrealised P&L for shares currently held.
+                </p>
+
+            </div>
+
+
+            <div id="holdingsPnlContainer">
+
+                <p class="empty-message">
+                    Loading holdings...
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             STATUS
+        ================================== -->
+
+        <section class="pnl-section">
+
+
+            <div class="project-status">
+
+
+                <div>
+
+                    <h3>
+                        Report Status
+                    </h3>
+
+                    <p id="reportStatus">
+                        Connecting to backend...
+                    </p>
+
+                </div>
+
+
+                <span
+                    class="status-badge"
+                    id="reportStatusBadge"
+                >
+                    Connecting
+                </span>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =================================
+         FOOTER
+    ================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 P&Lytics |
+            Portfolio Profit & Loss Calculator
+        </p>
+
+    </footer>
+
+
+
+    <!-- =================================
+         JAVASCRIPT
+    ================================== -->
+
+    <script>
+
+
+        // =================================
+        // BACKEND URL
+        // =================================
+
+        const API_URL =
+            "http://127.0.0.1:5000";
+
+
+
+        // =================================
+        // FORMAT MONEY
+        // =================================
+
+        function formatMoney(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "N/A";
+
+            }
+
+
+            const number =
+                Number(value);
+
+
+            if (Number.isNaN(number)) {
+
+                return "N/A";
+
+            }
+
+
+            return "₹" +
+                number.toFixed(2);
+
+        }
+
+
+
+        // =================================
+        // FORMAT P&L
+        // =================================
+
+        function formatPnl(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "N/A";
+
+            }
+
+
+            const number =
+                Number(value);
+
+
+            if (Number.isNaN(number)) {
+
+                return "N/A";
+
+            }
+
+
+            if (number > 0) {
+
+                return "+₹" +
+                    number.toFixed(2);
+
+            }
+
+
+            return "₹" +
+                number.toFixed(2);
+
+        }
+
+
+
+        // =================================
+        // P&L CSS CLASS
+        // =================================
+
+        function pnlClass(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "pnl-neutral";
+
+            }
+
+
+            const number =
+                Number(value);
+
+
+            if (Number.isNaN(number)) {
+
+                return "pnl-neutral";
+
+            }
+
+
+            if (number > 0) {
+
+                return "pnl-positive";
+
+            }
+
+
+            if (number < 0) {
+
+                return "pnl-negative";
+
+            }
+
+
+            return "pnl-neutral";
+
+        }
+
+
+
+        // =================================
+        // FORMAT NUMBER
+        // =================================
+
+        function formatNumber(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "N/A";
+
+            }
+
+
+            const number =
+                Number(value);
+
+
+            if (Number.isNaN(number)) {
+
+                return "N/A";
+
+            }
+
+
+            if (
+                Number.isInteger(number)
+            ) {
+
+                return number;
+
+            }
+
+
+            return number.toFixed(2);
+
+        }
+
+
+
+        // =================================
+        // LOAD P&L REPORT
+        // =================================
+
+        async function loadPnLReport() {
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        API_URL + "/portfolio"
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.error ||
+                        "Unable to load P&L report"
+                    );
+
+                }
+
+
+                console.log(
+                    "P&L Report Data:",
+                    data
+                );
+
+
+
+                // =================================
+                // READ VALUES
+                // =================================
+
+                const realised =
+                    data.realised_profit ?? 0;
+
+
+                const unrealised =
+                    data.unrealised_profit ?? 0;
+
+
+                const total =
+                    data.total_pnl ?? 0;
+
+
+                const totalCharges =
+                    data.total_charges ?? 0;
+
+
+
+                // =================================
+                // SUMMARY CARDS
+                // =================================
+
+                const realisedElement =
+                    document.getElementById(
+                        "realisedPnl"
+                    );
+
+
+                realisedElement.textContent =
+                    formatPnl(realised);
+
+
+                realisedElement.className =
+                    pnlClass(realised);
+
+
+
+                const unrealisedElement =
+                    document.getElementById(
+                        "unrealisedPnl"
+                    );
+
+
+                unrealisedElement.textContent =
+                    formatPnl(unrealised);
+
+
+                unrealisedElement.className =
+                    pnlClass(unrealised);
+
+
+
+                const totalElement =
+                    document.getElementById(
+                        "totalPnl"
+                    );
+
+
+                totalElement.textContent =
+                    formatPnl(total);
+
+
+                totalElement.className =
+                    pnlClass(total);
+
+
+
+                // =================================
+                // CALCULATION BOX
+                // =================================
+
+                document.getElementById(
+                    "calcRealised"
+                ).textContent =
+                    formatPnl(realised);
+
+
+                document.getElementById(
+                    "calcUnrealised"
+                ).textContent =
+                    formatPnl(unrealised);
+
+
+                document.getElementById(
+                    "reportTotalCharges"
+                ).textContent =
+                    formatMoney(totalCharges);
+
+
+                document.getElementById(
+                    "calcTotal"
+                ).textContent =
+                    formatPnl(total);
+
+
+
+                // =================================
+                // FIFO MATCH DETAILS
+                // =================================
+
+                const matches =
+                    data.fifo_matches || [];
+
+
+                const fifoContainer =
+                    document.getElementById(
+                        "fifoDetailsContainer"
+                    );
+
+
+                if (matches.length === 0) {
+
+                    fifoContainer.innerHTML =
+                        '<p class="empty-message">' +
+                        'No FIFO match details available.' +
+                        '</p>';
+
+                } else {
+
+
+                    let tableHTML = `
+
+                        <div class="fifo-table-wrapper">
+
+                            <table class="data-table">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Stock
+                                        </th>
+
+                                        <th>
+                                            Quantity
+                                        </th>
+
+                                        <th>
+                                            Buy Price
+                                        </th>
+
+                                        <th>
+                                            Adjusted Buy
+                                        </th>
+
+                                        <th>
+                                            Sell Price
+                                        </th>
+
+                                        <th>
+                                            BUY Charges
+                                        </th>
+
+                                        <th>
+                                            SELL Charges
+                                        </th>
+
+                                        <th>
+                                            P&L After BUY Charges
+                                        </th>
+
+                                        <th>
+                                            Net P&L
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                    `;
+
+
+                    matches.forEach(
+                        match => {
+
+
+                            const stock =
+                                match["Stock"] || "";
+
+
+                            const quantity =
+                                Number(
+                                    match["Quantity"] || 0
+                                );
+
+
+                            const buyPrice =
+                                Number(
+                                    match["Buy Price"] || 0
+                                );
+
+
+                            const adjustedBuyPrice =
+                                Number(
+                                    match[
+                                        "Adjusted Buy Price"
+                                    ] || 0
+                                );
+
+
+                            const sellPrice =
+                                Number(
+                                    match["Sell Price"] || 0
+                                );
+
+
+                            const buyCharges =
+                                Number(
+                                    match["Buy Charges"] || 0
+                                );
+
+
+                            const sellCharges =
+                                Number(
+                                    match[
+                                        "Allocated Charges"
+                                    ] || 0
+                                );
+
+
+                            const pnlAfterBuyCharges =
+                                Number(
+                                    match["Gross P&L"] || 0
+                                );
+
+
+                            const netPnl =
+                                Number(
+                                    match["Net P&L"] ||
+                                    pnlAfterBuyCharges
+                                );
+
+
+                            tableHTML += `
+
+                                <tr>
+
+                                    <td>
+                                        <strong>
+                                            ${stock}
+                                        </strong>
+                                    </td>
+
+                                    <td>
+                                        ${formatNumber(quantity)}
+                                    </td>
+
+                                    <td>
+                                        ${formatMoney(buyPrice)}
+                                    </td>
+
+                                    <td>
+                                        ${formatMoney(adjustedBuyPrice)}
+                                    </td>
+
+                                    <td>
+                                        ${formatMoney(sellPrice)}
+                                    </td>
+
+                                    <td>
+                                        ${formatMoney(buyCharges)}
+                                    </td>
+
+                                    <td>
+                                        ${formatMoney(sellCharges)}
+                                    </td>
+
+                                    <td class="${pnlClass(pnlAfterBuyCharges)}">
+                                        ${formatPnl(pnlAfterBuyCharges)}
+                                    </td>
+
+                                    <td class="${pnlClass(netPnl)}">
+                                        ${formatPnl(netPnl)}
+                                    </td>
+
+                                </tr>
+
+                            `;
+
+                        }
+                    );
+
+
+                    tableHTML += `
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    `;
+
+
+                    fifoContainer.innerHTML =
+                        tableHTML;
+
+                }
+
+
+
+                // =================================
+                // CURRENT HOLDINGS
+                // =================================
+
+                const holdings =
+                    data.holdings || [];
+
+
+                const holdingsContainer =
+                    document.getElementById(
+                        "holdingsPnlContainer"
+                    );
+
+
+                if (holdings.length === 0) {
+
+                    holdingsContainer.innerHTML =
+                        '<p class="empty-message">' +
+                        'No current holdings.' +
+                        '</p>';
+
+                } else {
+
+
+                    let holdingsHTML = `
+
+                        <div class="fifo-table-wrapper">
+
+                            <table class="data-table">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Stock
+                                        </th>
+
+                                        <th>
+                                            Quantity
+                                        </th>
+
+                                        <th>
+                                            FIFO Cost
+                                        </th>
+
+                                        <th>
+                                            Current Price
+                                        </th>
+
+                                        <th>
+                                            Market Value
+                                        </th>
+
+                                        <th>
+                                            Unrealised P&L
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                    `;
+
+
+                    holdings.forEach(
+                        holding => {
+
+
+                            const stock =
+                                holding["Stock"] || "";
+
+
+                            const quantity =
+                                holding["Quantity"];
+
+
+                            const fifoCost =
+                                holding["FIFO Cost"];
+
+
+                            const currentPrice =
+                                holding["Current Price"];
+
+
+                            const marketValue =
+                                holding["Market Value"];
+
+
+                            const holdingPnl =
+                                holding["Unrealised P&L"];
+
+
+                            holdingsHTML += `
+
+                                <tr>
+
+                                    <td>
+                                        <strong>
+                                            ${stock}
+                                        </strong>
+                                    </td>
+
+                                    <td>
+                                        ${formatNumber(quantity)}
+                                    </td>
+
+                                    <td>
+                                        ${formatMoney(fifoCost)}
+                                    </td>
+
+                                    <td>
+                                        ${formatMoney(currentPrice)}
+                                    </td>
+
+                                    <td>
+                                        ${formatMoney(marketValue)}
+                                    </td>
+
+                                    <td class="${pnlClass(holdingPnl)}">
+                                        ${formatPnl(holdingPnl)}
+                                    </td>
+
+                                </tr>
+
+                            `;
+
+                        }
+                    );
+
+
+                    holdingsHTML += `
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    `;
+
+
+                    holdingsContainer.innerHTML =
+                        holdingsHTML;
+
+                }
+
+
+
+                // =================================
+                // STATUS
+                // =================================
+
+                document.getElementById(
+                    "reportStatus"
+                ).textContent =
+                    "P&L report loaded successfully.";
+
+
+                document.getElementById(
+                    "reportStatusBadge"
+                ).textContent =
+                    "Connected";
+
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "P&L report error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "reportStatus"
+                ).textContent =
+                    "Unable to connect to backend.";
+
+
+                document.getElementById(
+                    "reportStatusBadge"
+                ).textContent =
+                    "Error";
+
+            }
+
+        }
+
+
+
+        // =================================
+        // START
+        // =================================
+
+        loadPnLReport();
+
+
+    </script>
+
+
+</body>
+
+</html>

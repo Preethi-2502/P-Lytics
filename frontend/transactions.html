@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>P&Lytics | Transactions</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         NAVIGATION BAR
+    ================================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <!-- Blue & White P&Lytics Logo -->
+            <svg
+                class="brand-logo"
+                width="42"
+                height="42"
+                viewBox="0 0 42 42"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="P&Lytics logo"
+            >
+
+                <circle
+                    cx="21"
+                    cy="21"
+                    r="19"
+                    fill="#2563EB"
+                />
+
+                <!-- White bars -->
+                <rect
+                    x="10"
+                    y="22"
+                    width="4"
+                    height="8"
+                    rx="1"
+                    fill="white"
+                />
+
+                <rect
+                    x="17"
+                    y="18"
+                    width="4"
+                    height="12"
+                    rx="1"
+                    fill="white"
+                />
+
+                <rect
+                    x="24"
+                    y="14"
+                    width="4"
+                    height="16"
+                    rx="1"
+                    fill="white"
+                />
+
+                <!-- Growth line -->
+                <path
+                    d="M10 18
+                       C14 17 15 15 18 16
+                       C21 17 22 12 25 13
+                       C28 14 30 10 33 9"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+                <!-- Arrow -->
+                <path
+                    d="M29 9H33V13"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+            </svg>
+
+
+            <span class="brand-name">
+                P&Lytics
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="upload.html">
+                Upload
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a
+                href="transactions.html"
+                class="active"
+            >
+                Transactions
+            </a>
+
+            <a href="pnl.html">
+                P&L Report
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =================================
+         MAIN CONTENT
+    ================================== -->
+
+    <main class="transactions-page">
+
+
+        <!-- =================================
+             PAGE HEADER
+        ================================== -->
+
+        <div class="transactions-header">
+
+            <div>
+
+                <p class="welcome">
+                    P&LYTICS • TRANSACTION HISTORY
+                </p>
+
+                <h1>
+                    Transactions
+                </h1>
+
+                <p>
+                    View the BUY and SELL transactions extracted
+                    from your contract note.
+                </p>
+
+            </div>
+
+
+            <a
+                href="upload.html"
+                class="btn primary"
+            >
+                Upload New PDF
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================
+             SEARCH AND FILTER
+        ================================== -->
+
+        <section class="transaction-controls">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by stock..."
+            >
+
+
+            <select id="typeFilter">
+
+                <option value="ALL">
+                    All Transactions
+                </option>
+
+                <option value="BUY">
+                    BUY
+                </option>
+
+                <option value="SELL">
+                    SELL
+                </option>
+
+            </select>
+
+        </section>
+
+
+
+        <!-- =================================
+             TRANSACTION TABLE
+        ================================== -->
+
+        <section class="transaction-table-section">
+
+            <div id="transactionContainer">
+
+                <p class="empty-message">
+                    No transactions available.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             SUMMARY
+        ================================== -->
+
+        <section class="transaction-summary">
+
+
+            <!-- Total Transactions -->
+
+            <div class="small-summary-card">
+
+                <span>
+                    Total Transactions
+                </span>
+
+                <strong id="totalTransactions">
+                    0
+                </strong>
+
+            </div>
+
+
+            <!-- Total BUY Quantity -->
+
+            <div class="small-summary-card">
+
+                <span>
+                    Total BUY Quantity
+                </span>
+
+                <strong id="totalBuy">
+                    0
+                </strong>
+
+            </div>
+
+
+            <!-- Total SELL Quantity -->
+
+            <div class="small-summary-card">
+
+                <span>
+                    Total SELL Quantity
+                </span>
+
+                <strong id="totalSell">
+                    0
+                </strong>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =================================
+         FOOTER
+    ================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 P&Lytics |
+            Portfolio Profit & Loss Calculator
+        </p>
+
+    </footer>
+
+
+
+    <!-- =================================
+         JAVASCRIPT
+    ================================== -->
+
+    <script>
+
+
+        // =================================
+        // TRANSACTIONS DATA
+        // =================================
+
+        let transactions = [];
+
+
+
+        // =================================
+        // LOAD TRANSACTIONS FROM BACKEND
+        // =================================
+
+        async function loadTransactions() {
+
+
+            const container =
+                document.getElementById(
+                    "transactionContainer"
+                );
+
+
+            container.innerHTML =
+                '<p class="empty-message">' +
+                'Loading transactions...' +
+                '</p>';
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        "http://127.0.0.1:5000/transactions"
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.error ||
+                        "Unable to load transactions"
+                    );
+
+                }
+
+
+                transactions =
+                    data.transactions || [];
+
+
+                displayTransactions(
+                    transactions
+                );
+
+
+            }
+
+
+            catch (error) {
+
+
+                console.error(
+                    "Transaction loading error:",
+                    error
+                );
+
+
+                container.innerHTML =
+                    '<p class="empty-message">' +
+                    'Unable to load transactions from the server.' +
+                    '</p>';
+
+            }
+
+        }
+
+
+
+        // =================================
+        // DISPLAY TRANSACTIONS
+        // =================================
+
+        function displayTransactions(data) {
+
+
+            const container =
+                document.getElementById(
+                    "transactionContainer"
+                );
+
+
+            // Total transactions
+
+            document.getElementById(
+                "totalTransactions"
+            ).textContent =
+                data.length;
+
+
+
+            // Total BUY quantity
+
+            const totalBuy =
+                data
+                    .filter(
+                        trade =>
+                            trade.Type === "BUY"
+                    )
+                    .reduce(
+                        (sum, trade) =>
+                            sum +
+                            Number(
+                                trade.Quantity || 0
+                            ),
+                        0
+                    );
+
+
+            // Total SELL quantity
+
+            const totalSell =
+                data
+                    .filter(
+                        trade =>
+                            trade.Type === "SELL"
+                    )
+                    .reduce(
+                        (sum, trade) =>
+                            sum +
+                            Number(
+                                trade.Quantity || 0
+                            ),
+                        0
+                    );
+
+
+            document.getElementById(
+                "totalBuy"
+            ).textContent =
+                totalBuy;
+
+
+            document.getElementById(
+                "totalSell"
+            ).textContent =
+                totalSell;
+
+
+
+            // No transactions
+
+            if (data.length === 0) {
+
+                container.innerHTML =
+                    '<p class="empty-message">' +
+                    'No transactions available.' +
+                    '</p>';
+
+                return;
+
+            }
+
+
+
+            // =================================
+            // CREATE TABLE
+            // =================================
+
+            let tableHTML = `
+
+                <div class="fifo-table-wrapper">
+
+                    <table class="data-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Stock
+                                </th>
+
+                                <th>
+                                    Type
+                                </th>
+
+                                <th>
+                                    Quantity
+                                </th>
+
+                                <th>
+                                    Price
+                                </th>
+
+                                <th>
+                                    Total Value
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+            `;
+
+
+
+            // =================================
+            // ADD TRANSACTIONS
+            // =================================
+
+            data.forEach(
+                trade => {
+
+
+                    const date =
+                        trade.Date || "";
+
+
+                    const stock =
+                        trade.Stock || "";
+
+
+                    const type =
+                        trade.Type || "";
+
+
+                    const quantity =
+                        Number(
+                            trade.Quantity || 0
+                        );
+
+
+                    const price =
+                        Number(
+                            trade.Price || 0
+                        );
+
+
+                    const totalValue =
+                        quantity * price;
+
+
+
+                    tableHTML += `
+
+                        <tr>
+
+                            <td>
+                                ${date}
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    ${stock}
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                <span
+                                    class="trade-type ${type.toLowerCase()}"
+                                >
+                                    ${type}
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                ${quantity}
+                            </td>
+
+
+                            <td>
+                                ₹${price.toFixed(2)}
+                            </td>
+
+
+                            <td>
+                                ₹${totalValue.toFixed(2)}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            );
+
+
+
+            tableHTML += `
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            `;
+
+
+
+            container.innerHTML =
+                tableHTML;
+
+        }
+
+
+
+        // =================================
+        // FILTER TRANSACTIONS
+        // =================================
+
+        function filterTransactions() {
+
+
+            const search =
+                document
+                    .getElementById(
+                        "searchInput"
+                    )
+                    .value
+                    .toUpperCase();
+
+
+            const selectedType =
+                document
+                    .getElementById(
+                        "typeFilter"
+                    )
+                    .value;
+
+
+
+            const filtered =
+                transactions.filter(
+                    trade => {
+
+
+                        const stock =
+                            String(
+                                trade.Stock || ""
+                            ).toUpperCase();
+
+
+                        const type =
+                            String(
+                                trade.Type || ""
+                            ).toUpperCase();
+
+
+                        const matchesStock =
+                            stock.includes(
+                                search
+                            );
+
+
+                        const matchesType =
+                            selectedType === "ALL" ||
+                            type === selectedType;
+
+
+                        return (
+                            matchesStock &&
+                            matchesType
+                        );
+
+                    }
+                );
+
+
+            displayTransactions(
+                filtered
+            );
+
+        }
+
+
+
+        // =================================
+        // SEARCH EVENT
+        // =================================
+
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .addEventListener(
+                "input",
+                filterTransactions
+            );
+
+
+
+        // =================================
+        // TYPE FILTER EVENT
+        // =================================
+
+        document
+            .getElementById(
+                "typeFilter"
+            )
+            .addEventListener(
+                "change",
+                filterTransactions
+            );
+
+
+
+        // =================================
+        // START
+        // =================================
+
+        loadTransactions();
+
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>P&Lytics | Portfolio P&L Calculator</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         NAVIGATION BAR
+    ================================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <!-- Blue & White P&Lytics Logo -->
+            <svg
+                class="brand-logo"
+                width="42"
+                height="42"
+                viewBox="0 0 42 42"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="P&Lytics logo"
+            >
+
+                <!-- Blue circle -->
+                <circle
+                    cx="21"
+                    cy="21"
+                    r="19"
+                    fill="#2563EB"
+                />
+
+                <!-- White bars -->
+                <rect
+                    x="10"
+                    y="22"
+                    width="4"
+                    height="8"
+                    rx="1"
+                    fill="white"
+                />
+
+                <rect
+                    x="17"
+                    y="18"
+                    width="4"
+                    height="12"
+                    rx="1"
+                    fill="white"
+                />
+
+                <rect
+                    x="24"
+                    y="14"
+                    width="4"
+                    height="16"
+                    rx="1"
+                    fill="white"
+                />
+
+                <!-- Growth line -->
+                <path
+                    d="M10 18
+                       C14 17 15 15 18 16
+                       C21 17 22 12 25 13
+                       C28 14 30 10 33 9"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+                <!-- Arrow -->
+                <path
+                    d="M29 9H33V13"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+            </svg>
+
+
+            <span class="brand-name">
+                P&Lytics
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <a
+                href="index.html"
+                class="active"
+            >
+                Home
+            </a>
+
+            <a
+                href="upload.html"
+                class="btn primary"
+            >
+                Upload Contract Note
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="transactions.html">
+                Transactions
+            </a>
+
+            <a href="pnl.html">
+                P&L Report
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =================================
+         HERO SECTION
+    ================================== -->
+
+    <main>
+
+
+        <section class="hero">
+
+
+            <div class="hero-content">
+
+
+                <p class="welcome">
+                    P&LYTICS • EQUITY INVESTING
+                </p>
+
+
+                <h1>
+
+                    Portfolio Profit & Loss
+
+                    <span>
+                        Calculator
+                    </span>
+
+                </h1>
+
+
+                <p class="description">
+
+                    Upload your broker contract note and easily
+                    analyse your buy and sell transactions,
+                    FIFO matching, charges, and portfolio
+                    profit or loss.
+
+                </p>
+
+
+                <div class="buttons">
+
+
+                    <a
+                        href="dashboard.html"
+                        class="btn primary"
+                    >
+                        View Dashboard
+                    </a>
+
+
+                    <a
+                        href="transactions.html"
+                        class="btn secondary"
+                    >
+                        View Transactions
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 PORTFOLIO SUMMARY CARD
+            ================================== -->
+
+            <div class="hero-card">
+
+
+                <h3>
+                    Portfolio Summary
+                </h3>
+
+
+                <div class="summary-item">
+
+                    <span>
+                        Total Investment
+                    </span>
+
+                    <strong>
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <span>
+                        Realised P&L
+                    </span>
+
+                    <strong>
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <span>
+                        Unrealised P&L
+                    </span>
+
+                    <strong>
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <span>
+                        Total Charges
+                    </span>
+
+                    <strong>
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================
+             FEATURES SECTION
+        ================================== -->
+
+        <section class="features">
+
+
+            <h2>
+                How P&Lytics Works
+            </h2>
+
+
+            <p class="section-text">
+
+                P&Lytics simplifies portfolio analysis by
+                processing broker contract-note data automatically.
+
+            </p>
+
+
+
+            <div class="feature-container">
+
+
+                <!-- Feature 1 -->
+
+                <div class="feature-card">
+
+
+                    <div class="icon">
+                        📄
+                    </div>
+
+
+                    <h3>
+                        1. Upload PDF
+                    </h3>
+
+
+                    <p>
+
+                        Upload your broker contract note containing
+                        your trading transactions.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- Feature 2 -->
+
+                <div class="feature-card">
+
+
+                    <div class="icon">
+                        🔍
+                    </div>
+
+
+                    <h3>
+                        2. Extract Trades
+                    </h3>
+
+
+                    <p>
+
+                        The PDF parser extracts stock, date,
+                        quantity, price, and transaction details.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- Feature 3 -->
+
+                <div class="feature-card">
+
+
+                    <div class="icon">
+                        🔄
+                    </div>
+
+
+                    <h3>
+                        3. FIFO Matching
+                    </h3>
+
+
+                    <p>
+
+                        Buy and sell transactions are matched using
+                        the First In, First Out method.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- Feature 4 -->
+
+                <div class="feature-card">
+
+
+                    <div class="icon">
+                        📊
+                    </div>
+
+
+                    <h3>
+                        4. Calculate P&L
+                    </h3>
+
+
+                    <p>
+
+                        The system calculates realised and unrealised
+                        profit or loss for your portfolio.
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================
+             PROJECT HIGHLIGHTS
+        ================================== -->
+
+        <section class="highlights">
+
+
+            <h2>
+                P&Lytics Highlights
+            </h2>
+
+
+            <div class="highlight-container">
+
+
+                <div>
+
+                    <h3>
+                        FIFO
+                    </h3>
+
+                    <p>
+                        First In, First Out lot matching
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        PDF Parser
+                    </h3>
+
+                    <p>
+                        Extract transaction details from contract notes
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Realised P&L
+                    </h3>
+
+                    <p>
+                        Calculate profit or loss from sold shares
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Unrealised P&L
+                    </h3>
+
+                    <p>
+                        Calculate P&L for remaining holdings
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =================================
+         FOOTER
+    ================================== -->
+
+    <footer>
+
+        <p>
+
+            © 2026 P&Lytics |
+            Portfolio Profit & Loss Calculator
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- =================================
+         JAVASCRIPT
+    ================================== -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
